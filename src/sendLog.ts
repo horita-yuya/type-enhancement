@@ -1,9 +1,3 @@
-type EventName = "page_view" | "click";
-type EventPayload = {
-  page_view: { id: string };
-  click: undefined;
-};
-
 function sendLog0(event: string, payload?: Record<string, string | number>) {
   console.log({ eventName: event, ...payload });
 }
@@ -12,6 +6,12 @@ sendLog0("page_view", { id: "123" });
 sendLog0("click");
 sendLog0("page_view");
 sendLog0("click", undefined);
+
+type EventName = "page_view" | "click";
+type EventPayload = {
+  page_view: { id: string };
+  click: undefined;
+};
 
 // Pattern1: Tuples in rest parameters
 // https://github.com/Microsoft/TypeScript/pull/24897

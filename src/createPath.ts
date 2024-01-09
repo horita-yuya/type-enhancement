@@ -1,10 +1,3 @@
-type Path = "/users" | "/users/:userId" | "/users/:userId/items/:itemId";
-type PathParams<PATH extends string> = PATH extends `${string}:${infer Param}/${infer Rest}`
-  ? Param | PathParams<`/${Rest}`>
-  : PATH extends `${string}:${infer Param}`
-    ? Param
-    : never;
-
 function createPath0(path: string, param?: Record<string, string>): string {
   let p: string = path;
   for (const key in param) {
@@ -23,6 +16,13 @@ console.assert(
 // Unexpected
 console.assert(createPath0("/users", { userId: "user0" }) === "/users");
 console.assert(createPath0("/users/:userId/items/:itemId", { userId: "user1" }) === "/users/user1/items/:itemId");
+
+type Path = "/users" | "/users/:userId" | "/users/:userId/items/:itemId";
+type PathParams<PATH extends string> = PATH extends `${string}:${infer Param}/${infer Rest}`
+  ? Param | PathParams<`/${Rest}`>
+  : PATH extends `${string}:${infer Param}`
+    ? Param
+    : never;
 
 function createPath<PATH extends Path>(
   path: PATH,
