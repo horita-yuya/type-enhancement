@@ -1,2 +1,2 @@
-import "./createPath";
-import "./sendLog";
+import "./v2_createPath";
+import "./v1_sendLog";
