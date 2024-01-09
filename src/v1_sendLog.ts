@@ -6,6 +6,7 @@ sendLog0("page_view", { id: "123" });
 sendLog0("click");
 sendLog0("page_view");
 sendLog0("click", undefined);
+sendLog0("click", { id: "123" });
 
 type EventName = "page_view" | "click";
 type EventPayload = {
@@ -33,6 +34,7 @@ sendLog("click");
 // Avoid unexpected behavior at build time
 // sendLog("page_view"); // Error
 // sendLog("click", undefined); // Error
+// sendLog("click", { id: "123" });
 
 // Pattern2: Overload
 // https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads
@@ -50,5 +52,6 @@ sendLog2("click");
 // Avoid unexpected behavior at build time
 // sendLog2("page_view"); // Error
 // sendLog2("click", undefined); // Error
+// sendLog2("click", { id: "123" });
 
 console.info("sendLog check completed");

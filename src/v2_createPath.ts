@@ -15,6 +15,8 @@ console.assert(
 );
 // Unexpected behavior
 console.assert(createPath0("/users", { userId: "user0" }) === "/users");
+console.assert(createPath0("/users/:userId") === "/users/:userId");
+console.assert(createPath0("/users/:userId", { userid: "1" }) === "/users/:userId");
 console.assert(createPath0("/users/:userId/items/:itemId", { userId: "user1" }) === "/users/user1/items/:itemId");
 
 type Path = "/users" | "/users/:userId" | "/users/:userId/items/:itemId";
@@ -23,6 +25,13 @@ type PathParams<PATH extends string> = PATH extends `${string}:${infer Param}/${
   : PATH extends `${string}:${infer Param}`
     ? Param
     : never;
+
+// never
+type Example1 = PathParams<"/users">;
+// "userId"
+type Example2 = PathParams<"/users/:userId">;
+// "userId" | "itemId"
+type Example3 = PathParams<"/users/:userId/items/:itemId">;
 
 function createPath<PATH extends Path>(
   path: PATH,
