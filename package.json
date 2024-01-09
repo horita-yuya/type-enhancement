@@ -1,0 +1,10 @@
+{
+  "name": "type-enhancement",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@biomejs/biome": "1.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
