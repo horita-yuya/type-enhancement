@@ -1,5 +1,10 @@
 function sendLog0(event: string, payload?: Record<string, string | number>) {
-  console.log({ eventName: event, ...payload });
+  const data = {
+    eventName: event,
+    ...payload,
+  };
+
+  console.log(data);
 }
 
 sendLog0("page_view", { id: "123" });
@@ -18,15 +23,14 @@ type EventPayload = {
 // https://github.com/Microsoft/TypeScript/pull/24897
 function sendLog<E extends EventName>(
   event: E,
-  ...options: EventPayload[E] extends undefined ? [] : [EventPayload[E]]
+  ...payloads: EventPayload[E] extends undefined ? [] : [EventPayload[E]]
 ) {
-  const data = options[0] ?? {};
-  const payload = {
+  const data = {
     eventName: event,
-    ...data,
+    ...payloads[0],
   };
 
-  console.log(payload);
+  console.log(data);
 }
 
 sendLog("page_view", { id: "123" });
@@ -42,9 +46,16 @@ function sendLog2<E extends EventName>(
   event: EventPayload[E] extends undefined ? never : E,
   payload: EventPayload[E],
 ): void;
-function sendLog2<E extends EventName>(event: EventPayload[E] extends undefined ? E : never): void;
+function sendLog2<E extends EventName>(
+  event: EventPayload[E] extends undefined ? E : never
+): void;
 function sendLog2<E extends EventName>(event: E, payload?: EventPayload[E]) {
-  console.log({ eventName: event, ...payload });
+  const data = {
+    eventName: event,
+    ...payload,
+  };
+
+  console.log(data);
 }
 
 sendLog2("page_view", { id: "123" });
