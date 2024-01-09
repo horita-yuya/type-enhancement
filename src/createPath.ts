@@ -13,7 +13,7 @@ console.assert(createPath0("/users/:userId", { userId: "user1" }) === "/users/us
 console.assert(
   createPath0("/users/:userId/items/:itemId", { userId: "user1", itemId: "1" }) === "/users/user1/items/1",
 );
-// Unexpected
+// Unexpected behavior
 console.assert(createPath0("/users", { userId: "user0" }) === "/users");
 console.assert(createPath0("/users/:userId/items/:itemId", { userId: "user1" }) === "/users/user1/items/:itemId");
 
@@ -42,7 +42,7 @@ function createPath<PATH extends Path>(
 console.assert(createPath("/users") === "/users");
 console.assert(createPath("/users/:userId", { userId: "user1" }) === "/users/user1");
 console.assert(createPath("/users/:userId/items/:itemId", { userId: "user1", itemId: "1" }) === "/users/user1/items/1");
-// Unexpected
+// Avoid unexpected behavior at build time
 // console.assert(createPath("/users", { userId: "user0" }) === "/users") // Error;
 // console.assert(createPath("/users/:userId/items/:itemId", { userId: "user1" }) === "/users/user1/items/:itemId") // Error;
 

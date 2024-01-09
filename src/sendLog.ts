@@ -30,6 +30,7 @@ function sendLog<E extends EventName>(
 
 sendLog("page_view", { id: "123" });
 sendLog("click");
+// Avoid unexpected behavior at build time
 // sendLog("page_view"); // Error
 // sendLog("click", undefined); // Error
 
@@ -46,6 +47,7 @@ function sendLog2<E extends EventName>(event: E, payload?: EventPayload[E]) {
 
 sendLog2("page_view", { id: "123" });
 sendLog2("click");
+// Avoid unexpected behavior at build time
 // sendLog2("page_view"); // Error
 // sendLog2("click", undefined); // Error
 
